@@ -1,0 +1,44 @@
+{
+  "cybersecurity_topics": [
+    {
+      "topic": "Phishing",
+      "description": "A type of cyber attack where attackers impersonate legitimate organizations to steal sensitive information."
+    },
+    {
+      "topic": "Malware",
+      "description": "Malicious software designed to harm, exploit, or otherwise compromise a computer system."
+    },
+    {
+      "topic": "Ransomware",
+      "description": "A type of malware that encrypts a user's files and demands payment for the decryption key."
+    },
+    {
+      "topic": "Social Engineering",
+      "description": "Manipulating individuals into divulging confidential information through psychological tricks."
+    },
+    {
+      "topic": "Firewall",
+      "description": "A network security device that monitors and controls incoming and outgoing network traffic based on predetermined security rules."
+    },
+    {
+      "topic": "Encryption",
+      "description": "The process of converting information or data into a code to prevent unauthorized access."
+    },
+    {
+      "topic": "Two-Factor Authentication (2FA)",
+      "description": "An additional layer of security used to ensure that people trying to gain access to an online account are who they say they are."
+    },
+    {
+      "topic": "Data Breach",
+      "description": "An incident where unauthorized access to confidential data occurs, often leading to data theft."
+    },
+    {
+      "topic": "VPN (Virtual Private Network)",
+      "description": "A service that encrypts your internet connection and hides your IP address to protect your online activity."
+    },
+    {
+      "topic": "Cybersecurity Frameworks",
+      "description": "Structured guidelines and best practices for managing cybersecurity risks."
+    }
+  ]
+}

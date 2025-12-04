@@ -1,0 +1,44 @@
+{
+  "trainingData": [
+    {
+      "question": "What is phishing?",
+      "response": "Phishing is a type of cyber attack where attackers impersonate legitimate organizations to trick individuals into providing sensitive information, such as passwords or credit card numbers."
+    },
+    {
+      "question": "How can I protect myself from malware?",
+      "response": "To protect yourself from malware, ensure that you have up-to-date antivirus software, avoid clicking on suspicious links, and download software only from trusted sources."
+    },
+    {
+      "question": "What is a firewall?",
+      "response": "A firewall is a security device or software that monitors and controls incoming and outgoing network traffic based on predetermined security rules."
+    },
+    {
+      "question": "What should I do if I think my account has been hacked?",
+      "response": "If you suspect your account has been hacked, change your password immediately, enable two-factor authentication, and monitor your account for any unauthorized activity."
+    },
+    {
+      "question": "What is two-factor authentication?",
+      "response": "Two-factor authentication (2FA) is a security process in which the user provides two different authentication factors to verify themselves, adding an extra layer of security."
+    },
+    {
+      "question": "What are strong passwords?",
+      "response": "Strong passwords are typically at least 12 characters long and include a mix of uppercase and lowercase letters, numbers, and special characters. Avoid using easily guessable information."
+    },
+    {
+      "question": "What is social engineering?",
+      "response": "Social engineering is a manipulation technique that exploits human psychology to gain confidential information, often through deception."
+    },
+    {
+      "question": "How can I recognize a secure website?",
+      "response": "A secure website typically has a URL that begins with 'https://' and displays a padlock icon in the address bar, indicating that the connection is encrypted."
+    },
+    {
+      "question": "What is ransomware?",
+      "response": "Ransomware is a type of malicious software that encrypts a victim's files and demands payment for the decryption key."
+    },
+    {
+      "question": "How often should I update my software?",
+      "response": "You should update your software regularly, ideally as soon as updates are available, to protect against vulnerabilities and security threats."
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+{"version":3,"file":"chatbot.d.ts","sourceRoot":"","sources":["../src/chatbot.ts"],"names":[],"mappings":"AAEA,OAAO,EAAE,eAAe,EAAE,MAAM,iBAAiB,CAAC;AAElD,cAAM,OAAO;IACT,OAAO,CAAC,SAAS,CAAY;IAC7B,OAAO,CAAC,aAAa,CAAgB;;IAO9B,iBAAiB,CAAC,WAAW,EAAE,MAAM,GAAG,eAAe;CAQjE;AAED,eAAe,OAAO,CAAC"}
