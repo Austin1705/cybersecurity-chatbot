@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cybersecurity Chatbot</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 900px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        .content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            padding: 30px;
+        }
+        
+        .section {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .section h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+        
+        .chat-box {
+            display: flex;
+            flex-direction: column;
+            height: 400px;
+        }
+        
+        .messages {
+            flex: 1;
+            overflow-y: auto;
+            background: #f5f5f5;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .message {
+            margin-bottom: 12px;
+            padding: 10px 15px;
+            border-radius: 8px;
+            max-width: 85%;
+            word-wrap: break-word;
+        }
+        
+        .message.user {
+            background: #667eea;
+            color: white;
+            margin-left: auto;
+            text-align: right;
+        }
+        
+        .message.bot {
+            background: #e8eaf6;
+            color: #333;
+            margin-right: auto;
+        }
+        
+        .input-group {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .input-group input {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: border-color 0.3s;
+        }
+        
+        .input-group input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .input-group button {
+            padding: 12px 25px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+        
+        .input-group button:hover {
+            background: #764ba2;
+        }
+        
+        .topics-section h3 {
+            color: #667eea;
+            margin-top: 15px;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        
+        .topic-item {
+            background: #f5f5f5;
+            padding: 10px 15px;
+            border-radius: 6px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .topic-item:hover {
+            background: #e8eaf6;
+            color: #667eea;
+        }
+        
+        .topic-item.active {
+            background: #667eea;
+            color: white;
+        }
+        
+        .status {
+            padding: 15px;
+            background: #f0f7ff;
+            border-left: 4px solid #667eea;
+            border-radius: 4px;
+            margin-bottom: 15px;
+        }
+        
+        .status.error {
+            background: #fff5f5;
+            border-color: #f56565;
+            color: #c53030;
+        }
+        
+        .status.success {
+            background: #f0fff4;
+            border-color: #48bb78;
+            color: #22543d;
+        }
+        
+        .endpoints {
+            list-style: none;
+            font-size: 0.9em;
+        }
+        
+        .endpoints li {
+            padding: 8px;
+            background: #f5f5f5;
+            margin-bottom: 8px;
+            border-radius: 4px;
+            border-left: 3px solid #667eea;
+            padding-left: 12px;
+        }
+        
+        .endpoints li code {
+            background: #eee;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.85em;
+        }
+        
+        @media (max-width: 768px) {
+            .content {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 1.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🛡️ Cybersecurity Chatbot</h1>
+            <p>AI-Powered Security Awareness Training</p>
+        </div>
+        
+        <div class="content">
+            <div class="section">
+                <h2>💬 Chat Interface</h2>
+                <div class="status" id="status">
+                    <strong>Status:</strong> <span id="statusText">Connecting...</span>
+                </div>
+                <div class="chat-box">
+                    <div class="messages" id="messages"></div>
+                    <div class="input-group">
+                        <input 
+                            type="text" 
+                            id="messageInput" 
+                            placeholder="Ask about cybersecurity..."
+                            autocomplete="off"
+                        >
+                        <button onclick="sendMessage()">Send</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2>📚 Knowledge Base</h2>
+                <div class="topics-section" id="topicsContainer">
+                    <div style="color: #999; text-align: center; padding: 20px;">
+                        Loading topics...
+                    </div>
+                </div>
+                <h3>🔌 API Endpoints</h3>
+                <ul class="endpoints">
+                    <li><code>GET /api/health</code> - Health check</li>
+                    <li><code>GET /api/chat/topics</code> - Get all topics</li>
+                    <li><code>GET /api/chat/search</code> - Search topics</li>
+                    <li><code>POST /api/chat/message</code> - Send message</li>
+                    <li><code>GET /api/chat/topic/:name</code> - Get topic details</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const API_URL = 'http://localhost:3000';
+        const TOKEN = 'valid-token';
+        let topics = [];
+        
+        // Check server status on load
+        window.addEventListener('load', () => {
+            checkServerStatus();
+            loadTopics();
+            addBotMessage('Hello! I\'m your Cybersecurity Chatbot. Ask me anything about cybersecurity best practices, threats, or defense mechanisms. 🛡️');
+        });
+        
+        function checkServerStatus() {
+            fetch(`${API_URL}/api/health`, {
+                headers: { 'Authorization': `Bearer ${TOKEN}` }
+            })
+            .then(r => r.json())
+            .then(data => {
+                document.getElementById('statusText').textContent = '✅ Connected';
+                document.getElementById('status').className = 'status success';
+            })
+            .catch(err => {
+                document.getElementById('statusText').textContent = '❌ Server not responding on port 3000';
+                document.getElementById('status').className = 'status error';
+            });
+        }
+        
+        function loadTopics() {
+            fetch(`${API_URL}/api/chat/topics`, {
+                headers: { 'Authorization': `Bearer ${TOKEN}` }
+            })
+            .then(r => r.json())
+            .then(data => {
+                topics = data.topics || [];
+                renderTopics();
+            })
+            .catch(err => console.error('Failed to load topics:', err));
+        }
+        
+        function renderTopics() {
+            const container = document.getElementById('topicsContainer');
+            container.innerHTML = '<h3>📋 Topics</h3>';
+            
+            topics.forEach(topic => {
+                const div = document.createElement('div');
+                div.className = 'topic-item';
+                div.textContent = topic;
+                div.onclick = () => askAboutTopic(topic);
+                container.appendChild(div);
+            });
+        }
+        
+        function askAboutTopic(topic) {
+            document.getElementById('messageInput').value = `Tell me about ${topic}`;
+            sendMessage();
+        }
+        
+        function sendMessage() {
+            const input = document.getElementById('messageInput');
+            const message = input.value.trim();
+            
+            if (!message) return;
+            
+            addUserMessage(message);
+            input.value = '';
+            
+            fetch(`${API_URL}/api/chat/message`, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${TOKEN}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ message })
+            })
+            .then(r => r.json())
+            .then(data => {
+                addBotMessage(data.response || 'Sorry, I couldn\'t process that.');
+            })
+            .catch(err => {
+                addBotMessage('❌ Error: Unable to reach the server. Make sure it\'s running on port 3000.');
+                console.error('Error:', err);
+            });
+        }
+        
+        function addUserMessage(text) {
+            const messagesDiv = document.getElementById('messages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message user';
+            messageDiv.textContent = text;
+            messagesDiv.appendChild(messageDiv);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+        
+        function addBotMessage(text) {
+            const messagesDiv = document.getElementById('messages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message bot';
+            messageDiv.textContent = text;
+            messagesDiv.appendChild(messageDiv);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+        
+        // Allow Enter key to send message
+        document.getElementById('messageInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') sendMessage();
+        });
+    </script>
+</body>
+</html>
